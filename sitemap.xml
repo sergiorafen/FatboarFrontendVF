@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+  <url>
+    <loc>https://fatboar.info/register</loc>
+  </url>
+  <url>
+    <loc>https://fatboar.info/login</loc>
+  </url>
+  <url>
+    <loc>https://fatboar.info/Menu</loc>
+  </url>
+  <url>
+    <loc>https://fatboar.info/CGU</loc>
+  </url>
+  <url>
+    <loc>https://fatboar.info/Contact</loc>
+  </url>
+  <url>
+    <loc>https://fatboar.info/Cashier</loc>
+  </url>
+  <url>
+    <loc>https://fatboar.info/Dashboard</loc>
+  </url>
+  <url>
+    <loc>https://fatboar.info/Dashboard/allTickets</loc>
+  </url>
+  <url>
+    <loc>https://fatboar.info/Dashboard/Game</loc>
+  </url>
+  <url>
+    <loc>https://fatboar.info/Profile</loc>
+  </url>
+  <url>
+    <loc>https://fatboar.info/Profile/mesLots</loc>
+  </url>
+  <url>
+    <loc>https://fatboar.info/Profile/Tickets</loc>
+  </url>
+</urlset>
