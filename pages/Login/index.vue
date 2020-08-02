@@ -16,8 +16,8 @@
                                 <h2 class="text-center font-up font-bold deep-orange-text py-4">Connexion</h2>
                                 <div class="md-form">
                                     <i class="fa fa-user prefix grey-text"></i>
-                                    <input type="email" id="orangeForm-email3" placeholder="Email"  class="input" name="username"
-                  v-model="username"
+                                    <input type="email" id="orangeForm-email3" placeholder="Email"  class="input" name="email"
+                  v-model="email"
                   required>
                                 </div>
                                
@@ -54,7 +54,7 @@ const Cookie = process.client ? require('js-cookie') : undefined
         },
     data() {
       return {
-            username: '',
+            email: '',
             password: '',
             error: null
       }
@@ -74,9 +74,7 @@ const Cookie = process.client ? require('js-cookie') : undefined
         async login() {
             try {
                 await this.$auth.loginWith('local', 
-                {data: {username: this.username,password: this.password}}).then((resp) => {
-                    console.log('resp login look here yoga->'+resp);
-                })
+                {data: {email: this.email,password: this.password}})
                 this.$router.push('/profile')
             } catch (e) {
                 this.error = e.response.data.message

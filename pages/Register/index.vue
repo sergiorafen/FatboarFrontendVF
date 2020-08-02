@@ -26,7 +26,7 @@
                                 <h2 class="text-center font font-bold deep-orange-text py-4">Remplissez le formulaire pour participer</h2>
                                 <div class="md-form">
                                     <i class="fa fa-envelope prefix grey-text"></i>
-                                    <input type="email" id="orangeForm-email3"  placeholder="Email"  class="form-control" name="username" v-model="username" required>
+                                    <input type="email" id="orangeForm-email3"  placeholder="Email"  class="form-control" name="email" v-model="email" required>
                                 </div>
                                 <div class="md-form">
                                     <i class="fa fa-lock prefix grey-text"></i>
@@ -79,7 +79,7 @@ export default {
         return{
             cgvcgu:false,
             newsletter:false,
-            username:'',
+            email:'',
             password:'',
             password_confirm:'',
             majeur:false,
@@ -92,7 +92,7 @@ export default {
                 try {
                       await this.$axios.post('http://127.0.0.1:8000/register',
                      qs.stringify({
-                            username: this.username,
+                            email: this.email,
                             password: this.password,
                             cgvcgu: this.cgvcgu,
                             newsletter:this.newsletter,

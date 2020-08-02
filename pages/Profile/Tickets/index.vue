@@ -18,8 +18,8 @@
               Vous voulez saisir un nouveau ticket de caisse?
               Si vous avez plus de 18 € d'achat tentez de gagner la nouvelle Range Rover Evoque et plein d'autres lots
               </b-card-text>
-              <input type="text" minlength="10" maxlength="10" pattern="[0-9]{10}" name="ticketdecaisse" v-model="ticketdecaisse" placeholder="Saisir le numero de  ticket de caisse à 10 chiffres" required>
-              <input type="number" min="18" max="1000" name="priceTicket" v-model="priceTicket" placeholder="Saisir le montant du ticket en €" required>
+              <input type="text" minlength="10" maxlength="10" pattern="[0-9]{10}" name="ticketdecaisse" v-model="numoticket" placeholder="Saisir le numero de  ticket de caisse à 10 chiffres" required>
+              <input type="number" min="18" max="1000" name="totalprice" v-model="totalprice" placeholder="Saisir le montant du ticket en €" required>
               <button type="submit"  class="btn btn-success">Valider<i class="fa fa-angle-double-right pl-2" aria-hidden="true"></i></button>
       </form>
     </b-card-body>
@@ -39,31 +39,54 @@ Vue.use(Chartkick.use(Chart))
     computed:{...mapGetters(['loggedInUser'])},
     data() {
       return {
-        ticketdecaisse:'',
+        numoticket:0,
         username:'',
-        price:'',
+        totalprice:50,
         gain:'',
         items: [],
         fields: [
-          {key: 'username', label: 'Email', sortable: true},
-          {key: 'gain', label: 'gain', sortable: true},
-          {key: 'price', label: 'Prix', sortable: true},
-          {key: 'ticketdecaisse', label: 'Ticket de caisse', sortable: true}
+          {key: 'numoticket', label: 'Ticket de caisse', sortable: true},
+          {key: 'datepublished', label: 'date', sortable: true},
+          {key: 'totalprice', label: 'Prix', sortable: true},
+          {key: 'etat', label: 'Etat', sortable: true}
         ]
       }
     },
-    asyncData ({ params }) {
-      return axios.get(`http://127.0.0.1:8000/api/tickets`
-      )
-      .then((res) => {
-          return { items: res.data['hydra:member']}
-      })
+    // asyncData (context) {
+      
+    //   const config={ headers: {'Content-Type': 'application/json',"Content-type": "application/json",Authorization:`Bearer ${context.app.$auth.getToken('local')}`}};
+    //   let response= axios.get(`http://127.0.0.1:8000/api/fatboar/tickets`,config
+    //   )
+    //   .then((res) => {
+    //     console.log(response.data['hydra:member'])
+    //       return { items: response.data['hydra:member']}
+    //   })
+    // },
+    async mounted() {
+      const config={ headers: {'Content-Type': 'application/json',"Content-type": "application/json",Authorization: `${this.$auth.getToken('local')}`}};
+      const response = await axios.get(
+        "http://127.0.0.1:8000/api/fatboar/tickets",config
+      );
+      this.items = response.data['hydra:member']
     },
      methods:{
+      //  async apiTickets () {
+      //               try {
+      //                 const {resp} = await this.$axios.get('http://127.0.0.1:8000/api/fatboar/tickets', {
+      //                   headers: { Authorization: `${this.$auth.getToken('local')}` }
+      //                 }).then((res)=>{
+      //                     return {items:res.data['hydra:members']}
+      //                 })
+      //               } catch (e) {
+      //                 console.log(e)
+      //               }
+      //             },
              postNewTicket() {
-                const config={ headers: {'Content-Type': 'application/json',"Content-type": "application/json"} };
-                return axios.post(`http://127.0.0.1:8000/api/tickets`, 
-                {ticketdecaisse: this.ticketdecaisse,username:this.loggedInUser.username,price:this.priceTicket,gain: 'ticket gagnants'},
+                const config={ headers: {'Content-Type': 'application/json',"Content-type": "application/json",Authorization: `${this.$auth.getToken('local')}`} };
+
+                console.log(`${this.$auth.getToken('local')}`)
+                return axios.post(`http://127.0.0.1:8000/api/fatboar/tickets`, 
+                {numoticket: parseInt(this.numoticket,10) ,datepublished:'2020-02-06',totalprice:parseInt(this.totalprice,10),etat:'DISPONIBLE',ticketlot:'/api/fatboar/lots/1'},
                 config).then(response=>{console.log(response)})
             }
         }

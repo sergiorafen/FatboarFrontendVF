@@ -36,7 +36,7 @@
         },
         methods:{
              putDataGain() {
-                const config={ headers: {'Content-Type': 'application/json',"Content-type": "application/json"} };
+                const config={ headers: {'Content-Type': 'application/json',"Content-type": "application/json",Authorization: `${this.$auth.getToken('local')}`} };
                 return axios.put(`http://127.0.0.1:8000/api/gains/1`, {"etat": 'RECU'},config).then(response=>{console.log(response)})
             }
         }
